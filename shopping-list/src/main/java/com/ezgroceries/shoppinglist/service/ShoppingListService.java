@@ -18,6 +18,11 @@ public class ShoppingListService {
         return new ArrayList<>(shoppingLists.values());
     }
 
+    public ShoppingList getSpecificShoppingList(UUID shoppingListId) {
+        ShoppingList shoppingList = shoppingLists.get(shoppingListId);
+        return shoppingList;
+    }
+
     public ShoppingList addShoppingList(ShoppingList shoppingList) {
         shoppingList.setShoppingListId(UUID.randomUUID());
         shoppingLists.put(shoppingList.getShoppingListId(), shoppingList);
