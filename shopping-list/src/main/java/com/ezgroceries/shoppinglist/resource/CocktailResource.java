@@ -1,72 +1,22 @@
 package com.ezgroceries.shoppinglist.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.ezgroceries.shoppinglist.model.Cocktail;
+import com.ezgroceries.shoppinglist.service.CocktailService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/cocktails", produces = "application/json")
 public class CocktailResource {
 
-    private UUID cocktailId;
-    private String name;
-    private String glass;
-    private String instructions;
-    private String image;
-    private List<String> ingredients;
+    private CocktailService cocktailService = new CocktailService();
 
-    public CocktailResource(UUID cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
-        this.cocktailId = cocktailId;
-        this.name = name;
-        this.glass = glass;
-        this.instructions = instructions;
-        this.image = image;
-        this.ingredients = ingredients;
-    }
-
-    public UUID getCocktailId() {
-        return cocktailId;
-    }
-
-    public void setCocktailId(UUID cocktailId) {
-        this.cocktailId = cocktailId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGlass() {
-        return glass;
-    }
-
-    public void setGlass(String glass) {
-        this.glass = glass;
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
+    @GetMapping
+    public List<Cocktail> get(@RequestParam String search) {
+        return cocktailService.getAllCocktails();
     }
 }
