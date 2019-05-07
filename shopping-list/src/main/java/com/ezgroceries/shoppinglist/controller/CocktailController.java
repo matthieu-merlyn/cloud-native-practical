@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.resource;
+package com.ezgroceries.shoppinglist.controller;
 
 import com.ezgroceries.shoppinglist.model.Cocktail;
 import com.ezgroceries.shoppinglist.service.CocktailService;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/cocktails", produces = "application/json")
-public class CocktailResource {
+public class CocktailController {
 
     private CocktailService cocktailService = new CocktailService();
 
