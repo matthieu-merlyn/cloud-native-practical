@@ -1,11 +1,13 @@
 package com.ezgroceries.shoppinglist.service;
 
 import com.ezgroceries.shoppinglist.model.Cocktail;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class CocktailService {
 
     public List<Cocktail> getAllCocktails() {
