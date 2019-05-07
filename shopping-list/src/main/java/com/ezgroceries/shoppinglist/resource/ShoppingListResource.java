@@ -39,7 +39,4 @@ public class ShoppingListResource {
         return shoppingListService.addShoppingList(newShoppingList);
     }
 
-    // TODO
-    // @PostMapping(value = "/{shoppingListId}/cocktails")
-    // public CocktailResource getCocktailResource() { return new CocktailResource(); }
 }
