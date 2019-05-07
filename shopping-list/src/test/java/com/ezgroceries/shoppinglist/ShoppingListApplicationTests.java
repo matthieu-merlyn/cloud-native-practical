@@ -27,4 +27,14 @@ public class ShoppingListApplicationTests {
         this.mockMvc.perform(get("/cocktails?search=Russian"));
     }
 
+    @Test
+    public void getAllShoppingLists() throws Exception {
+        this.mockMvc.perform(get("/shopping-lists"));
+    }
+
+    @Test
+    public void getNonExisting() throws Exception {
+        this.mockMvc.perform(get("/non-existing"));
+    }
+
 }
