@@ -1,9 +1,6 @@
 package com.ezgroceries.shoppinglist.model;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class ShoppingList {
@@ -12,9 +9,10 @@ public class ShoppingList {
     private String name;
     private List<String> ingredients;
 
-    public ShoppingList(UUID shoppingListId, String name) {
+    public ShoppingList(UUID shoppingListId, String name, List<String> ingredients) {
         this.shoppingListId = shoppingListId;
         this.name = name;
+        this.ingredients = ingredients;
     }
 
     public UUID getShoppingListId() {
