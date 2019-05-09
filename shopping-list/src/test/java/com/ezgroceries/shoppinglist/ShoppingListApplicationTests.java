@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,18 +24,9 @@ public class ShoppingListApplicationTests {
     }
 
     @Test
-    public void getAllCocktails() throws Exception {
-        this.mockMvc.perform(get("/cocktails?search=Russian"));
-    }
-
-    @Test
-    public void getAllShoppingLists() throws Exception {
-        this.mockMvc.perform(get("/shopping-lists"));
-    }
-
-    @Test
     public void getNonExisting() throws Exception {
-        this.mockMvc.perform(get("/non-existing"));
+        this.mockMvc.perform(get("/non-existing"))
+                .andExpect(status().isNotFound());
     }
 
 }
