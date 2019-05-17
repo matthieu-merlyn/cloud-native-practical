@@ -25,6 +25,10 @@ public class CocktailEntity {
     @Convert(converter = StringSetConverter.class)
     private Set<String> ingredients;
 
+    public CocktailEntity() {
+        // default constructor necessary for Hibernate reflection
+    }
+
     public CocktailEntity(UUID id, String idDrink, String name) {
         this.id = id;
         this.idDrink = idDrink;

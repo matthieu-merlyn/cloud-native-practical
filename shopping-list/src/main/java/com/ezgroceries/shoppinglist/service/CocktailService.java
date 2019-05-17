@@ -34,7 +34,7 @@ public class CocktailService {
         List<String> ids = drinks.stream().map(Drink::getIdDrink).collect(Collectors.toList());
 
         //Get all the ones we already have from our DB, use a Map for convenient lookup
-        Map<String, CocktailEntity> existingEntityMap = cocktailRepository.findByIdDrink(ids).stream()
+        Map<String, CocktailEntity> existingEntityMap = cocktailRepository.findByIdDrinkIn(ids).stream()
                 .collect(Collectors.toMap(CocktailEntity::getIdDrink, o -> o, (o, o2) -> o));
 
         //Stream over all the drinks, map them to the existing ones, persist a new one if not existing
