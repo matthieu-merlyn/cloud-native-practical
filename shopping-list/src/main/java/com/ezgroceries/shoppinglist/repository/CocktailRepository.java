@@ -1,10 +1,11 @@
 package com.ezgroceries.shoppinglist.repository;
 
-import com.ezgroceries.shoppinglist.entities.Cocktail;
+import com.ezgroceries.shoppinglist.entities.CocktailEntity;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.UUID;
 
-public interface CocktailRepository extends CrudRepository<Cocktail, UUID> {
-    Cocktail findByIdDrink(String idDrink);
+public interface CocktailRepository extends CrudRepository<CocktailEntity, UUID> {
+    List<CocktailEntity> findByIdDrink(List<String> idDrinks);
 }

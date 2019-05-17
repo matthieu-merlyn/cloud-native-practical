@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "shopping_list")
-public class ShoppingList {
+public class ShoppingListEntity {
 
     @Id
     private UUID id;

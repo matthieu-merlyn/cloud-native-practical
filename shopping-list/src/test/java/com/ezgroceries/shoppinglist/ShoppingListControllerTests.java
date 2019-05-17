@@ -67,5 +67,4 @@ public class ShoppingListControllerTests {
                 .andExpect(jsonPath("$.name").value("Stephanie's Birthday"));
     }
 
-    // TODO addCocktailsToShoppingList
 }

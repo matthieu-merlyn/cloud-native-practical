@@ -1,9 +1,8 @@
 package com.ezgroceries.shoppinglist.client;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class CocktailDBResponse {
 
@@ -39,6 +38,10 @@ public class CocktailDBResponse {
         private String strIngredient14;
         private String strIngredient15;
 
+        public String getIdDrink() {
+            return idDrink;
+        }
+
         public String getStrDrink() {
             return strDrink;
         }
@@ -55,9 +58,9 @@ public class CocktailDBResponse {
             return strDrinkThumb;
         }
 
-        public Set<String> getStrIngredients() {
+        public List<String> getStrIngredients() {
 
-            Set<String> ingredients = new HashSet<>(Arrays.asList(
+            List<String> ingredients = new ArrayList<>(Arrays.asList(
                     getStrIngredient1(),
                     getStrIngredient2(),
                     getStrIngredient3(),
@@ -139,6 +142,7 @@ public class CocktailDBResponse {
         public String getStrIngredient15() {
             return strIngredient15;
         }
+
     }
 
 }

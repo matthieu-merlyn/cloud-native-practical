@@ -12,7 +12,7 @@ public class ShoppingListService {
         this.shoppingListRepository = shoppingListRepository;
     }
 
-    // public ShoppingList create(ShoppingList shoppingList) {
+    // public ShoppingListEntity create(ShoppingListEntity shoppingList) {
     //     ...
     // }
 

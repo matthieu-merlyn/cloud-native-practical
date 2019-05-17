@@ -63,7 +63,7 @@ public class ShoppingListApplication
 
 ### Search cocktails
 
-Study the response of the search cocktail API:
+Study the response of the search cocktailEntity API:
 
 Request:
 ```
@@ -78,7 +78,7 @@ Response (excerpt)
       "idDrink": "13060",
       "strDrink": "Margarita",
       "strGlass": "Cocktail glass",
-      "strInstructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.",
+      "strInstructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktailEntity. Shake the other ingredients with ice, then carefully pour into the glass.",
       "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg",
       "strIngredient1": "Tequila",
       "strIngredient2": "Triple sec",
