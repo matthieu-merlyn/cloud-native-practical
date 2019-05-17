@@ -1,8 +1,12 @@
-package com.ezgroceries.shoppinglist.model;
+package com.ezgroceries.shoppinglist.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "shopping_list")
 public class ShoppingList {
 
     private UUID shoppingListId;

@@ -1,8 +1,15 @@
-package com.ezgroceries.shoppinglist.model;
+package com.ezgroceries.shoppinglist.entities;
 
-import java.util.List;
+import com.ezgroceries.shoppinglist.util.StringSetConverter;
+
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Set;
 import java.util.UUID;
 
+@Entity
+@Table(name = "cocktail")
 public class Cocktail {
 
     private UUID cocktailId;
@@ -10,9 +17,10 @@ public class Cocktail {
     private String glass;
     private String instructions;
     private String image;
-    private List<String> ingredients;
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> ingredients;
 
-    public Cocktail(UUID cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
+    public Cocktail(UUID cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;
         this.glass = glass;
@@ -41,7 +49,7 @@ public class Cocktail {
         return image;
     }
 
-    public List<String> getIngredients() {
+    public Set<String> getIngredients() {
         return ingredients;
     }
 }

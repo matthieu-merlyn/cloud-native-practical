@@ -1,8 +1,9 @@
-package com.ezgroceries.shoppinglist.model;
+package com.ezgroceries.shoppinglist.client;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CocktailDBResponse {
 
@@ -54,9 +55,9 @@ public class CocktailDBResponse {
             return strDrinkThumb;
         }
 
-        public List<String> getStrIngredients() {
+        public Set<String> getStrIngredients() {
 
-            List<String> ingredients = new ArrayList<>(Arrays.asList(
+            Set<String> ingredients = new HashSet<>(Arrays.asList(
                     getStrIngredient1(),
                     getStrIngredient2(),
                     getStrIngredient3(),
