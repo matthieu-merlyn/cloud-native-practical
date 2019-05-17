@@ -4,6 +4,7 @@ import com.ezgroceries.shoppinglist.util.StringSetConverter;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Set;
 import java.util.UUID;
@@ -12,44 +13,13 @@ import java.util.UUID;
 @Table(name = "cocktail")
 public class Cocktail {
 
-    private UUID cocktailId;
+    @Id
+    private UUID id;
+
+    private String idDrink;
     private String name;
-    private String glass;
-    private String instructions;
-    private String image;
+
     @Convert(converter = StringSetConverter.class)
     private Set<String> ingredients;
 
-    public Cocktail(UUID cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
-        this.cocktailId = cocktailId;
-        this.name = name;
-        this.glass = glass;
-        this.instructions = instructions;
-        this.image = image;
-        this.ingredients = ingredients;
-    }
-
-    public UUID getCocktailId() {
-        return cocktailId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getGlass() {
-        return glass;
-    }
-
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Set<String> getIngredients() {
-        return ingredients;
-    }
 }

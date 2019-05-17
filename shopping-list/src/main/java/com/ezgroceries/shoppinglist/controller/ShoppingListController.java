@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,23 +21,26 @@ public class ShoppingListController {
 
     @GetMapping
     public List<ShoppingList> getAllShoppingLists()  {
-        return getDummyResources();
+        return new ArrayList<>();
+        // TODO return getDummyResources();
     }
 
     @GetMapping(value = "/{shoppingListId}")
     public ShoppingList getSpecificShoppingList(@PathVariable UUID shoppingListId) {
-        return new ShoppingList(
+        return new ShoppingList();
+        /** TODO return new ShoppingList(
                 UUID.fromString("90689338-499a-4c49-af90-f1e73068ad4f"),
                 "Stephanie's Birthday",
                 Arrays.asList("Tequila", "Triple Sec", "Lime Juice", "Salt", "Blue Curacao")
-        );
+        );*/
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingList createShoppingList(@RequestBody ShoppingList newShoppingList) {
-        newShoppingList.setShoppingListId(UUID.randomUUID());
-        return newShoppingList;
+        return new ShoppingList();
+        /** TODO newShoppingList.setShoppingListId(UUID.randomUUID());
+        return newShoppingList; */
     }
 
     @PostMapping(value = "/{shoppingListId}/cocktails")
@@ -46,7 +49,7 @@ public class ShoppingListController {
         return cocktails;
     }
 
-    private List<ShoppingList> getDummyResources() {
+    /** private List<ShoppingList> getDummyResources() {
         return Arrays.asList(
                 new ShoppingList(
                         UUID.fromString("4ba92a46-1d1b-4e52-8e38-13cd56c7224c"),
@@ -59,6 +62,6 @@ public class ShoppingListController {
                         Arrays.asList("Tequila", "Triple Sec", "Lime Juice", "Salt", "Blue Curacao")
                 )
         );
-    }
+    } */
 
 }
