@@ -2,6 +2,8 @@ package com.ezgroceries.shoppinglist.controller;
 
 import com.ezgroceries.shoppinglist.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.entities.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.model.ShoppingList;
+import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,10 +20,33 @@ import java.util.UUID;
 @RequestMapping(value = "/shopping-lists", produces = "application/json")
 public class ShoppingListController {
 
+    private final ShoppingListService shoppingListService;
+
+    public ShoppingListController(ShoppingListService shoppingListService) {
+        this.shoppingListService = shoppingListService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
+        return shoppingListService.createShoppingList(shoppingList);
+
+
+        /** TODO newShoppingList.setShoppingListId(UUID.randomUUID());
+         return newShoppingList; */
+    }
+
+
+
+
+
+
+
+
+
     @GetMapping
     public List<ShoppingListEntity> getAllShoppingLists()  {
-        return new ArrayList<>();
-        // TODO return getDummyResources();
+        return shoppingListService.getAllShoppingLists();
     }
 
     @GetMapping(value = "/{shoppingListId}")
@@ -33,14 +57,6 @@ public class ShoppingListController {
                 "Stephanie's Birthday",
                 Arrays.asList("Tequila", "Triple Sec", "Lime Juice", "Salt", "Blue Curacao")
         );*/
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingListEntity createShoppingList(@RequestBody ShoppingListEntity newShoppingList) {
-        return new ShoppingListEntity();
-        /** TODO newShoppingList.setShoppingListId(UUID.randomUUID());
-        return newShoppingList; */
     }
 
     @PostMapping(value = "/{shoppingListId}/cocktails")

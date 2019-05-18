@@ -48,10 +48,10 @@ public class CocktailService {
         }).collect(Collectors.toMap(CocktailEntity::getIdDrink, o -> o, (o, o2) -> o));
 
         //Merge drinks and our entities, transform to CocktailResource instances
-        return mergeAndTransform(drinks, allEntityMap);
+        return mergeAndTransformCocktails(drinks, allEntityMap);
     }
 
-    private List<Cocktail> mergeAndTransform(List<Drink> drinks, Map<String, CocktailEntity> allEntityMap) {
+    private List<Cocktail> mergeAndTransformCocktails(List<Drink> drinks, Map<String, CocktailEntity> allEntityMap) {
         return drinks.stream().map(drink ->
                 new Cocktail(allEntityMap.get(
                         drink.getIdDrink()).getId(),

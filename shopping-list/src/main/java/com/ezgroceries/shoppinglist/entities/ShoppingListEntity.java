@@ -13,4 +13,20 @@ public class ShoppingListEntity {
     private UUID id;
     private String name;
 
+    public ShoppingListEntity() {
+        // default constructor necessary for Hibernate reflection
+    }
+
+    public ShoppingListEntity(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
