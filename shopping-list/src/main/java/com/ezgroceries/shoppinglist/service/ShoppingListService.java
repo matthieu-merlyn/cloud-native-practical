@@ -1,5 +1,6 @@
 package com.ezgroceries.shoppinglist.service;
 
+import com.ezgroceries.shoppinglist.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.entities.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.model.Cocktail;
 import com.ezgroceries.shoppinglist.model.ShoppingList;
@@ -7,16 +8,18 @@ import com.ezgroceries.shoppinglist.repository.ShoppingListRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class ShoppingListService {
 
     private final ShoppingListRepository shoppingListRepository;
+    private final CocktailService cocktailService;
 
-    public ShoppingListService(ShoppingListRepository shoppingListRepository) {
+    public ShoppingListService(ShoppingListRepository shoppingListRepository, CocktailService cocktailService) {
         this.shoppingListRepository = shoppingListRepository;
+        this.cocktailService = cocktailService;
     }
 
     public List<ShoppingListEntity> getAllShoppingLists() {
@@ -29,21 +32,17 @@ public class ShoppingListService {
     }
 
     public ShoppingList addCocktailsToShoppingList(String shoppingListId, List<Cocktail> cocktails) {
-        Optional<ShoppingListEntity> shoppingListEntity = shoppingListRepository.findById(UUID.fromString(shoppingListId));
-        shoppingListEntity.ifPresent(shoppingListEntity1 -> {
-            ShoppingList existingShoppingList = transformShoppingList(shoppingListEntity1);
 
-        });
+        Set<CocktailEntity> cocktailEntities = cocktailService.findCocktailEntitiesById(cocktails);
+        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(UUID.fromString(shoppingListId)).orElse(null);
 
-        // if (shoppingListEntity.isPresent()) {
-        //     transformShoppingList(shoppingListEntity)
-        // } else {
-        //     throw new RuntimeException("Shopping list not found for ID: " + shoppingListId);
-        // }
+        if(shoppingListEntity == null) {
+            throw new RuntimeException("No shopping list found for ID: " + shoppingListId);
+        } else {
+            shoppingListEntity.setCocktails(cocktailEntities);
+            return transformShoppingList(shoppingListEntity);
+        }
 
-
-
-        return null;
     }
 
     private ShoppingList transformShoppingList(ShoppingListEntity shoppingListEntity) {

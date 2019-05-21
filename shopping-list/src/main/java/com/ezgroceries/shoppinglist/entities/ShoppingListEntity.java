@@ -39,4 +39,8 @@ public class ShoppingListEntity {
     public String getName() {
         return name;
     }
+
+    public void setCocktails(Set<CocktailEntity> cocktails) {
+        this.cocktails = cocktails;
+    }
 }

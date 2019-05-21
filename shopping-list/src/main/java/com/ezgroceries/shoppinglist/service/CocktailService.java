@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -63,4 +64,8 @@ public class CocktailService {
                 .collect(Collectors.toList());
     }
 
+    public Set<CocktailEntity> findCocktailEntitiesById(List<Cocktail> cocktails) {
+        Set<UUID> cocktailIds = cocktails.stream().map(Cocktail::getCocktailId).collect(Collectors.toSet());
+        return cocktailRepository.findAllById(cocktailIds);
+    }
 }
