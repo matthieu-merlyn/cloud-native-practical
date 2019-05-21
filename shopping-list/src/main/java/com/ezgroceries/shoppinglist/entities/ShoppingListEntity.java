@@ -2,7 +2,11 @@ package com.ezgroceries.shoppinglist.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -12,6 +16,12 @@ public class ShoppingListEntity {
     @Id
     private UUID id;
     private String name;
+
+    @ManyToMany
+    @JoinTable(name = "cocktail_shopping_list",
+            joinColumns = @JoinColumn(name = "shopping_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "cocktail_id"))
+    Set<CocktailEntity> cocktails;
 
     public ShoppingListEntity() {
         // default constructor necessary for Hibernate reflection

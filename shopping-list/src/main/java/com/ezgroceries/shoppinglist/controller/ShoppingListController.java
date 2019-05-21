@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.controller;
 
-import com.ezgroceries.shoppinglist.entities.CocktailEntity;
 import com.ezgroceries.shoppinglist.entities.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.model.Cocktail;
 import com.ezgroceries.shoppinglist.model.ShoppingList;
 import com.ezgroceries.shoppinglist.service.ShoppingListService;
 import org.springframework.http.HttpStatus;
@@ -30,13 +30,13 @@ public class ShoppingListController {
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
         return shoppingListService.createShoppingList(shoppingList);
-
-
-        /** TODO newShoppingList.setShoppingListId(UUID.randomUUID());
-         return newShoppingList; */
     }
 
-
+    @PostMapping(value = "/{shoppingListId}/cocktails")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ShoppingList addCocktailsToShoppingList(@PathVariable String shoppingListId, @RequestBody List<Cocktail> cocktails) {
+        return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
+    }
 
 
 
@@ -59,10 +59,6 @@ public class ShoppingListController {
         );*/
     }
 
-    @PostMapping(value = "/{shoppingListId}/cocktails")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<CocktailEntity> addCocktailsToShoppingList(@PathVariable String shoppingListId, @RequestBody List<CocktailEntity> cocktails) {
-        return cocktails;
-    }
+
 
 }
