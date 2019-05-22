@@ -21,7 +21,7 @@ public class ShoppingListEntity {
     @JoinTable(name = "cocktail_shopping_list",
             joinColumns = @JoinColumn(name = "shopping_list_id"),
             inverseJoinColumns = @JoinColumn(name = "cocktail_id"))
-    Set<CocktailEntity> cocktails;
+    private Set<CocktailEntity> cocktails;
 
     public ShoppingListEntity() {
         // default constructor necessary for Hibernate reflection
@@ -40,7 +40,11 @@ public class ShoppingListEntity {
         return name;
     }
 
+    public Set<CocktailEntity> getCocktails() {
+        return cocktails;
+    }
+
     public void setCocktails(Set<CocktailEntity> cocktails) {
-        this.cocktails = cocktails;
+        this.cocktails.addAll(cocktails);
     }
 }

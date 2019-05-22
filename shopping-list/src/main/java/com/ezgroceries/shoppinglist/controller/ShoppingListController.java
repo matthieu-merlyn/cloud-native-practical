@@ -1,6 +1,5 @@
 package com.ezgroceries.shoppinglist.controller;
 
-import com.ezgroceries.shoppinglist.entities.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.model.Cocktail;
 import com.ezgroceries.shoppinglist.model.ShoppingList;
 import com.ezgroceries.shoppinglist.service.ShoppingListService;
@@ -34,31 +33,18 @@ public class ShoppingListController {
 
     @PostMapping(value = "/{shoppingListId}/cocktails")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingList addCocktailsToShoppingList(@PathVariable String shoppingListId, @RequestBody List<Cocktail> cocktails) {
+    public ShoppingList addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<Cocktail> cocktails) {
         return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
     }
 
-
-
-
-
-
+    @GetMapping(value = "/{shoppingListId}")
+    public ShoppingList getSpecificShoppingList(@PathVariable UUID shoppingListId) {
+        return shoppingListService.getSpecificShoppingList(shoppingListId);
+    }
 
     @GetMapping
-    public List<ShoppingListEntity> getAllShoppingLists()  {
+    public List<ShoppingList> getAllShoppingLists()  {
         return shoppingListService.getAllShoppingLists();
     }
-
-    @GetMapping(value = "/{shoppingListId}")
-    public ShoppingListEntity getSpecificShoppingList(@PathVariable UUID shoppingListId) {
-        return new ShoppingListEntity();
-        /** TODO return new ShoppingListEntity(
-                UUID.fromString("90689338-499a-4c49-af90-f1e73068ad4f"),
-                "Stephanie's Birthday",
-                Arrays.asList("Tequila", "Triple Sec", "Lime Juice", "Salt", "Blue Curacao")
-        );*/
-    }
-
-
 
 }

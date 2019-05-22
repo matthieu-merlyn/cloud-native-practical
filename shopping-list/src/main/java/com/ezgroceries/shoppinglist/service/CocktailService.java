@@ -42,7 +42,7 @@ public class CocktailService {
         Map<String, CocktailEntity> allEntityMap = drinks.stream().map(drink -> {
             CocktailEntity cocktailEntity = existingEntityMap.get(drink.getIdDrink());
             if (cocktailEntity == null) {
-                CocktailEntity newCocktailEntity = new CocktailEntity(UUID.randomUUID(), drink.getIdDrink(), drink.getStrDrink());
+                CocktailEntity newCocktailEntity = new CocktailEntity(UUID.randomUUID(), drink.getIdDrink(), drink.getStrDrink(), drink.getStrIngredients());
                 cocktailEntity = cocktailRepository.save(newCocktailEntity);
             }
             return cocktailEntity;
@@ -66,6 +66,6 @@ public class CocktailService {
 
     public Set<CocktailEntity> findCocktailEntitiesById(List<Cocktail> cocktails) {
         Set<UUID> cocktailIds = cocktails.stream().map(Cocktail::getCocktailId).collect(Collectors.toSet());
-        return cocktailRepository.findAllById(cocktailIds);
+        return cocktailRepository.findAllByIdIn(cocktailIds);
     }
 }
