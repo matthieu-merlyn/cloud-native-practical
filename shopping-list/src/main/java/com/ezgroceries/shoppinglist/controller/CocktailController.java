@@ -22,10 +22,6 @@ public class CocktailController {
     @GetMapping
     public List<Cocktail> searchCocktails(@RequestParam String search) {
         return cocktailService.searchCocktails(search);
-
     }
-
-
-
 
 }

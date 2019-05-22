@@ -7,6 +7,7 @@ import com.ezgroceries.shoppinglist.model.ShoppingList;
 import com.ezgroceries.shoppinglist.repository.ShoppingListRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -27,19 +28,15 @@ public class ShoppingListService {
     public ShoppingList getSpecificShoppingList(UUID shoppingListId) {
         ShoppingListEntity shoppingListEntity = getShoppingListEntity(shoppingListId);
         ShoppingList shoppingList = transformShoppingList(shoppingListEntity);
-
-        Set<String> ingredients = shoppingListEntity.getCocktails().stream()
-                .map(CocktailEntity::getIngredients)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
-
-        shoppingList.setIngredients(ingredients);
-
         return shoppingList;
     }
 
     public List<ShoppingList> getAllShoppingLists() {
-        return null;
+        List<ShoppingList> shoppingLists = new ArrayList<>();
+        for (ShoppingListEntity shoppingListEntity : shoppingListRepository.findAll()) {
+            shoppingLists.add(transformShoppingList(shoppingListEntity));
+        }
+        return shoppingLists;
     }
 
     public ShoppingList createShoppingList(ShoppingList shoppingList) {
@@ -56,7 +53,15 @@ public class ShoppingListService {
     }
 
     private ShoppingList transformShoppingList(ShoppingListEntity shoppingListEntity) {
-        return new ShoppingList(shoppingListEntity.getId(), shoppingListEntity.getName());
+        Set<String> ingredients = shoppingListEntity.getCocktails().stream()
+                .map(CocktailEntity::getIngredients)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+
+        ShoppingList shoppingList = new ShoppingList(shoppingListEntity.getId(), shoppingListEntity.getName());
+        shoppingList.setIngredients(ingredients);
+
+        return shoppingList;
     }
 
     private ShoppingListEntity getShoppingListEntity(UUID shoppingListId) {
