@@ -10,7 +10,7 @@ A partial example for the CocktailEntity:
 
 ```
 @Entity
-@Table(name = "cocktail")
+@Table(name = "cocktailEntity")
 public class CocktailEntity
 ```
 

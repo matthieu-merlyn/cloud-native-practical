@@ -21,6 +21,8 @@ public class ShoppingListControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    // MME - old tests
+
     @Test
     public void getAllShoppingLists() throws Exception {
         this.mockMvc.perform(get("/shopping-lists"))
@@ -67,5 +69,4 @@ public class ShoppingListControllerTests {
                 .andExpect(jsonPath("$.name").value("Stephanie's Birthday"));
     }
 
-    // TODO addCocktailsToShoppingList
 }

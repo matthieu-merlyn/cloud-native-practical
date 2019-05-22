@@ -1,18 +1,19 @@
 package com.ezgroceries.shoppinglist.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class ShoppingList {
 
     private UUID shoppingListId;
     private String name;
-    private List<String> ingredients;
+    private Set<String> ingredients;
 
-    public ShoppingList(UUID shoppingListId, String name, List<String> ingredients) {
+    public ShoppingList(UUID shoppingListId, String name) {
         this.shoppingListId = shoppingListId;
         this.name = name;
-        this.ingredients = ingredients;
+        this.ingredients = new HashSet<>();
     }
 
     public UUID getShoppingListId() {
@@ -27,8 +28,11 @@ public class ShoppingList {
         return name;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
+    public void setIngredients(Set<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
+    public Set<String> getIngredients() {
+        return ingredients;
+    }
 }

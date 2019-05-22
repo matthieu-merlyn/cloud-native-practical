@@ -2,7 +2,7 @@
 
 In close collaboration with the Mobile teams, our ezGroceries team has designed a REST API that will cover all the functionalities of the initial minimum viable product.
 
-To make sure the Mobile app can start their implementation asap we have decided to implement these APIs using dummy values before we integrate with the third party cocktail and meal APIs.
+To make sure the Mobile app can start their implementation asap we have decided to implement these APIs using dummy values before we integrate with the third party cocktailEntity and meal APIs.
 
 Other technical decisions that were taken during the design include:
 
@@ -42,7 +42,7 @@ Response
         "cocktailId": "d615ec78-fe93-467b-8d26-5d26d8eab073",
         "name": "Blue Margerita",
         "glass": "Cocktail glass",
-        "instructions": "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
+        "instructions": "Rub rim of cocktailEntity glass with lime juice. Dip rim in coarse salt..",
         "image": "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
         "ingredients": [
             "Tequila",
@@ -76,7 +76,7 @@ public class CocktailController {
                 new CocktailResource(
                         UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab073"), "Blue Margerita",
                 "Cocktail glass",
-                "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
+                "Rub rim of cocktailEntity glass with lime juice. Dip rim in coarse salt..",
                 "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
                         Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
     }
