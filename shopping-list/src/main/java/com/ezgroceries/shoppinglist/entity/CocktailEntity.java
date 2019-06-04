@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.entities;
+package com.ezgroceries.shoppinglist.entity;
 
 import com.ezgroceries.shoppinglist.util.StringSetConverter;
 

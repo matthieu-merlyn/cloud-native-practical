@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglist.repository;
 
-import com.ezgroceries.shoppinglist.entities.CocktailEntity;
+import com.ezgroceries.shoppinglist.entity.CocktailEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
