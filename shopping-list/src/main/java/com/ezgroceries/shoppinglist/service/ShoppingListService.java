@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.service;
 
-import com.ezgroceries.shoppinglist.entities.CocktailEntity;
-import com.ezgroceries.shoppinglist.entities.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.entity.CocktailEntity;
+import com.ezgroceries.shoppinglist.entity.ShoppingListEntity;
 import com.ezgroceries.shoppinglist.model.Cocktail;
 import com.ezgroceries.shoppinglist.model.ShoppingList;
 import com.ezgroceries.shoppinglist.repository.ShoppingListRepository;
