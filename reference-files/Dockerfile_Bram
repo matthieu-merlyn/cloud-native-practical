@@ -1,0 +1,23 @@
+# Build
+
+FROM maven:3.6.1-jdk-11-slim AS builder
+
+COPY . /source
+WORKDIR /source
+
+RUN mvn -B package -DskipTests
+
+# Run
+
+FROM azul/zulu-openjdk-alpine:11-jre
+
+LABEL maintainer="bram.gotink@kbc.be"
+
+RUN adduser -h /app -Ds /bin/bash app-user
+WORKDIR /app
+USER app-user
+
+EXPOSE 8080
+COPY --from=builder /source/target/shopping-list-*.jar /app/application.jar
+
+ENTRYPOINT [ "java", "-jar", "/app/application.jar", "--spring.profiles.active=hsqldb" ]
