@@ -13,5 +13,6 @@ COPY --from=builder /opt/target/shopping-list-0.0.1-SNAPSHOT.jar /opt/app.jar
 ADD src/main/resources/application.properties /config/application.properties
 
 EXPOSE 8080
+EXPOSE 8443
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/opt/app.jar", "-Dspring.config.location=/config/application.properties" ]
