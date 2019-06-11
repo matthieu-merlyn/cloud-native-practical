@@ -1,0 +1,104 @@
+# Application configmap
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-app-config
+  namespace: shopping-list-yaml
+data:
+  application.properties: |-
+    spring.datasource.url=jdbc:postgresql://cocktail-db:5432/${DB_NAME}
+    spring.datasource.username=${DB_USER}
+    spring.datasource.password=${DB_PASSWORD}
+
+---
+# Application deploymentconfig
+
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: shopping-list
+  namespace: shopping-list-yaml
+spec:
+  triggers:
+    - type: ConfigChange
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: shopping-list
+    spec:
+      volumes:
+        - name: config-vol
+          configMap:
+            name: spring-app-config
+      containers:
+        - name: shopping-list
+          image: gibbert/shopping-list:0.2.5
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-user
+                  name: cocktail-db-credentials
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-password
+                  name: cocktail-db-credentials
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-name
+                  name: cocktail-db-credentials
+          volumeMounts:
+            - name: config-vol
+              mountPath: /config/
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 200Mi
+            limits:
+              cpu: 2000m
+              memory: 400Mi
+          lifecycle:
+            preStop:
+              exec:
+                # SIGTERM triggers a quick exit; gracefully terminate instead
+                command: ["kill", "-SIGINT", "`pidof java`"]
+
+---
+# Application service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-list
+  namespace: shopping-list-yaml
+spec:
+  ports:
+    - name: web
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  selector:
+    name: shopping-list
+
+---
+# Application route
+
+apiVersion: "route.openshift.io/v1"
+kind: Route
+metadata:
+  name: shopping-list
+  namespace: shopping-list-yaml
+spec:
+  port:
+    targetPort: web
+  to:
+    kind: Service
+    name: shopping-list

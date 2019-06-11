@@ -1,0 +1,116 @@
+# Database secret
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cocktail-db-credentials
+  namespace: shopping-list-yaml
+data:
+  cocktail-db-name: "Y29ja3RhaWwtZGI="
+  cocktail-db-password: "dkVyWV8kZUN1UjNfcEAkNXcwckQh"
+  cocktail-db-user: "Y29ja3RhaWwtdXNlcg=="
+
+---
+# Database deploymentconfig
+
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+  name: cocktail-db
+  namespace: shopping-list-yaml
+spec:
+  replicas: 1
+  selector:
+    name: cocktail-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: cocktail-db
+    spec:
+      containers:
+        - image: " "
+          imagePullPolicy: IfNotPresent
+          name: postgresql
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-user
+                  name: cocktail-db-credentials
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-password
+                  name: cocktail-db-credentials
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: cocktail-db-name
+                  name: cocktail-db-credentials
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: [ "/usr/libexec/check-container", "--live" ]
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+          readinessProbe:
+            exec:
+              command: [ "/usr/libexec/check-container" ]
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 512Mi
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+            - mountPath: /var/lib/pgsql/data
+              name: cocktail-db-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      volumes:
+        - name: cocktail-db-data
+          emptyDir:
+            medium: ""
+  test: false
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - postgresql
+        from:
+          kind: ImageStreamTag
+          name: 'postgresql:9.6'
+          namespace: openshift
+        lastTriggeredImage: ""
+    - type: ConfigChange
+
+---
+# Database service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cocktail-db
+  namespace: shopping-list-yaml
+spec:
+  ports:
+    - name: db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    name: cocktail-db
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
