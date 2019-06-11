@@ -139,6 +139,13 @@ public class CocktailDBResponse {
             return strIngredient15;
         }
 
+        public void setIdDrink(String idDrink) {
+            this.idDrink = idDrink;
+        }
+
+        public void setStrDrink(String strDrink) {
+            this.strDrink = strDrink;
+        }
     }
 
 }

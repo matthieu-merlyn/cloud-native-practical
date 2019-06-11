@@ -44,6 +44,10 @@ public class CocktailEntity {
         return idDrink;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Set<String> getIngredients() {
         return ingredients;
     }
