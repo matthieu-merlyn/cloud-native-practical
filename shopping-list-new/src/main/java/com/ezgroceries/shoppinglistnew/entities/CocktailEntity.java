@@ -48,4 +48,7 @@ public class CocktailEntity {
         return ingredients;
     }
 
+    public String getName() {
+        return name;
+    }
 }
