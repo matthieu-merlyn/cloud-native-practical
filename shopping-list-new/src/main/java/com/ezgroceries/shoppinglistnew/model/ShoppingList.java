@@ -30,4 +30,5 @@ public class ShoppingList {
     public List<String> getIngredients() {
         return ingredients;
     }
+
 }

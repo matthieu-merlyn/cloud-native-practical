@@ -44,5 +44,4 @@ public class Cocktail {
     public List<String> getIngredients() {
         return ingredients;
     }
-
 }
