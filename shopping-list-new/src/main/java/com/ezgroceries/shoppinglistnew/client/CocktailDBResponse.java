@@ -1,8 +1,9 @@
-package com.ezgroceries.shoppinglistnew.model;
+package com.ezgroceries.shoppinglistnew.client;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CocktailDBResponse {
 
@@ -38,6 +39,10 @@ public class CocktailDBResponse {
         private String strIngredient14;
         private String strIngredient15;
 
+        public String getIdDrink() {
+            return idDrink;
+        }
+
         public String getStrDrink() {
             return strDrink;
         }
@@ -54,29 +59,24 @@ public class CocktailDBResponse {
             return strDrinkThumb;
         }
 
-        public List<String> getStrIngredients() {
-
-            List<String> ingredients = new ArrayList<>(Arrays.asList(
-                    getStrIngredient1(),
-                    getStrIngredient2(),
-                    getStrIngredient3(),
-                    getStrIngredient4(),
-                    getStrIngredient5(),
-                    getStrIngredient6(),
-                    getStrIngredient7(),
-                    getStrIngredient8(),
-                    getStrIngredient9(),
-                    getStrIngredient10(),
-                    getStrIngredient11(),
-                    getStrIngredient12(),
-                    getStrIngredient13(),
-                    getStrIngredient14(),
-                    getStrIngredient15()
-            ));
-
-            ingredients.removeAll(Arrays.asList("", null));
-            return ingredients;
-
+        public Set<String> getStrIngredients() {
+            Set<String> ingredients = new HashSet<>();
+            ingredients.add(getStrIngredient1());
+            ingredients.add(getStrIngredient2());
+            ingredients.add(getStrIngredient3());
+            ingredients.add(getStrIngredient4());
+            ingredients.add(getStrIngredient5());
+            ingredients.add(getStrIngredient6());
+            ingredients.add(getStrIngredient7());
+            ingredients.add(getStrIngredient8());
+            ingredients.add(getStrIngredient9());
+            ingredients.add(getStrIngredient10());
+            ingredients.add(getStrIngredient11());
+            ingredients.add(getStrIngredient12());
+            ingredients.add(getStrIngredient13());
+            ingredients.add(getStrIngredient14());
+            ingredients.add(getStrIngredient15());
+            return ingredients.stream().filter(i -> i!= null && !i.isEmpty()).collect(Collectors.toSet());
         }
 
         public String getStrIngredient1() {
@@ -138,5 +138,7 @@ public class CocktailDBResponse {
         public String getStrIngredient15() {
             return strIngredient15;
         }
+
     }
+
 }

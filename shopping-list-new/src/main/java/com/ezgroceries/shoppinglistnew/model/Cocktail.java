@@ -1,6 +1,6 @@
 package com.ezgroceries.shoppinglistnew.model;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class Cocktail {
@@ -10,9 +10,9 @@ public class Cocktail {
     private String glass;
     private String instructions;
     private String image;
-    private List<String> ingredients;
+    private Set<String> ingredients;
 
-    public Cocktail(UUID cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
+    public Cocktail(UUID cocktailId, String name, String glass, String instructions, String image, Set<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;
         this.glass = glass;
@@ -41,7 +41,7 @@ public class Cocktail {
         return image;
     }
 
-    public List<String> getIngredients() {
+    public Set<String> getIngredients() {
         return ingredients;
     }
 }

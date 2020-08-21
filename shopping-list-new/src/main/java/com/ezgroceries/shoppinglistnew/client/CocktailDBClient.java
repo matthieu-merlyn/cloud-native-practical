@@ -1,6 +1,5 @@
 package com.ezgroceries.shoppinglistnew.client;
 
-import com.ezgroceries.shoppinglistnew.model.CocktailDBResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
